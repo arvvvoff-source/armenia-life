@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARMENIA LIFE</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+    }
+
+    .card {
+      background: #1d1d1d;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>🎮 ARMENIA LIFE</h1>
+
+    <div class="stat">
+      <span>💰 Գումար</span>
+      <b id="money">250,000 ֏</b>
+    </div>
+
+    <div class="stat">
+      <span>💼 Աշխատանք</span>
+      <b>Առաքիչ</b>
+    </div>
+
+    <div class="stat">
+      <span>🏠 Տուն</span>
+      <b>Չկա</b>
+    </div>
+
+    <div class="stat">
+      <span>🚗 Մեքենա</span>
+      <b>Չկա</b>
+    </div>
+
+    <div class="stat">
+      <span>⭐ Հեղինակություն</span>
+      <b>12</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>⚡ Այսօրվա իրադարձություն</h2>
+    <p>Քո մեքենան փչացավ։ Ի՞նչ ես անում։</p>
+
+    <button onclick="repair()">🔧 Վերանորոգել — 80,000 ֏</button>
+    <button onclick="ignore()">🚌 Մի քանի օր տրանսպորտով գնալ</button>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    let money = 250000;
+
+    function updateMoney() {
+      document.getElementById("money").innerText =
+        money.toLocaleString("hy-AM") + " ֏";
+    }
+
+    function repair() {
+      if (money >= 80000) {
+        money -= 80000;
+        updateMoney();
+        tg.showAlert("Մեքենան վերանորոգվեց 🚗");
+      } else {
+        tg.showAlert("Բավարար գումար չունես ❌");
+      }
+    }
+
+    function ignore() {
+      tg.showAlert("Դու որոշեցիր ժամանակավորապես օգտվել տրանսպորտից 🚌");
+    }
+  </script>
+
+</body>
+</html>
