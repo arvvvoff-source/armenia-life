@@ -1,116 +1,1264 @@
 <!DOCTYPE html>
 <html lang="hy">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARMENIA LIFE</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0,user-scalable=no">
 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-    }
+<title>ARMENIA LIFE</title>
 
-    .card {
-      background: #1d1d1d;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
-    h1 {
-      margin-top: 0;
-    }
+body{
+  margin:0;
+  background:#0d0f12;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+}
 
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-    }
+.app{
+  max-width:520px;
+  margin:auto;
+  padding:15px;
+  padding-bottom:90px;
+}
 
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 10px;
-      border: 0;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
+.header{
+  background:linear-gradient(135deg,#20252c,#15181d);
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:12px;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+}
+
+.level{
+  color:#aaa;
+  margin-top:4px;
+}
+
+.money{
+  font-size:30px;
+  font-weight:800;
+  margin-top:15px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.stat{
+  background:#191c21;
+  border-radius:17px;
+  padding:14px;
+}
+
+.stat-title{
+  color:#999;
+  font-size:13px;
+}
+
+.stat-value{
+  font-size:19px;
+  font-weight:700;
+  margin-top:5px;
+}
+
+.card{
+  background:#191c21;
+  border-radius:20px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.card h2{
+  margin:0 0 12px;
+  font-size:19px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  margin-top:8px;
+  background:#282d35;
+  color:#fff;
+  font-size:15px;
+  font-weight:700;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.primary{
+  background:#fff;
+  color:#111;
+}
+
+.disabled{
+  opacity:.45;
+}
+
+.progress{
+  height:8px;
+  background:#30343b;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress div{
+  height:100%;
+  width:100%;
+  background:#fff;
+}
+
+.event{
+  line-height:1.5;
+  color:#ddd;
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#15181d;
+  border-top:1px solid #292d33;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding:10px;
+  z-index:20;
+}
+
+.nav button{
+  margin:0;
+  padding:11px 8px;
+  font-size:12px;
+  max-width:105px;
+}
+
+.hidden{
+  display:none;
+}
+
+.small{
+  color:#999;
+  font-size:13px;
+}
+
+.item{
+  background:#22262d;
+  padding:14px;
+  border-radius:15px;
+  margin-top:8px;
+}
+
+.item-top{
+  display:flex;
+  justify-content:space-between;
+  font-weight:700;
+}
+
+.price{
+  color:#ddd;
+  margin-top:5px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>🎮 ARMENIA LIFE</h1>
+<div class="app">
 
-    <div class="stat">
-      <span>💰 Գումար</span>
-      <b id="money">250,000 ֏</b>
-    </div>
+  <div class="header">
+    <div class="logo">🎮 ARMENIA LIFE</div>
+    <div class="level" id="level">Level 1 • Սկսնակ</div>
 
-    <div class="stat">
-      <span>💼 Աշխատանք</span>
-      <b>Առաքիչ</b>
-    </div>
+    <div class="money" id="money">0 ֏</div>
 
-    <div class="stat">
-      <span>🏠 Տուն</span>
-      <b>Չկա</b>
-    </div>
-
-    <div class="stat">
-      <span>🚗 Մեքենա</span>
-      <b>Չկա</b>
-    </div>
-
-    <div class="stat">
-      <span>⭐ Հեղինակություն</span>
-      <b>12</b>
+    <div class="small">
+      Կապիտալ՝ <span id="capital">0 ֏</span>
     </div>
   </div>
 
-  <div class="card">
-    <h2>⚡ Այսօրվա իրադարձություն</h2>
-    <p>Քո մեքենան փչացավ։ Ի՞նչ ես անում։</p>
+  <div class="stats">
 
-    <button onclick="repair()">🔧 Վերանորոգել — 80,000 ֏</button>
-    <button onclick="ignore()">🚌 Մի քանի օր տրանսպորտով գնալ</button>
+    <div class="stat">
+      <div class="stat-title">❤️ Առողջություն</div>
+      <div class="stat-value" id="health">100</div>
+      <div class="progress">
+        <div id="healthBar"></div>
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">⚡ Էներգիա</div>
+      <div class="stat-value" id="energy">100</div>
+      <div class="progress">
+        <div id="energyBar"></div>
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">🧠 Կրթություն</div>
+      <div class="stat-value" id="education">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">⭐ Հեղինակություն</div>
+      <div class="stat-value" id="reputation">0</div>
+    </div>
+
   </div>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
 
-    let money = 250000;
+  <!-- HOME -->
 
-    function updateMoney() {
-      document.getElementById("money").innerText =
-        money.toLocaleString("hy-AM") + " ֏";
-    }
+  <div id="homePage">
 
-    function repair() {
-      if (money >= 80000) {
-        money -= 80000;
-        updateMoney();
-        tg.showAlert("Մեքենան վերանորոգվեց 🚗");
-      } else {
-        tg.showAlert("Բավարար գումար չունես ❌");
-      }
-    }
+    <div class="card">
+      <h2>⚡ Այսօրվա կյանքը</h2>
 
-    function ignore() {
-      tg.showAlert("Դու որոշեցիր ժամանակավորապես օգտվել տրանսպորտից 🚌");
-    }
-  </script>
+      <div class="event" id="eventText">
+        Դու նոր ես սկսում կյանքդ։
+        Փող չունես, աշխատանք չունես։
+        Առաջին քայլը քոնն է։
+      </div>
+
+      <button class="primary" onclick="work()">
+        💼 Աշխատել
+      </button>
+
+      <button onclick="eat()">
+        🍔 Սնվել — 3,000 ֏
+      </button>
+
+      <button onclick="study()">
+        🧠 Սովորել
+      </button>
+    </div>
+
+
+    <div class="card">
+      <h2>💼 Ներկայիս աշխատանք</h2>
+
+      <div id="jobInfo">
+        Գործազուրկ
+      </div>
+
+      <button onclick="openPage('jobsPage')">
+        🔎 Փնտրել աշխատանք
+      </button>
+    </div>
+
+
+    <div class="card">
+      <h2>🏠 Բնակություն</h2>
+
+      <div id="homeInfo">
+        Անօթևան
+      </div>
+
+      <button onclick="openPage('realPage')">
+        🏠 Դիտել բնակարանները
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- JOBS -->
+
+  <div id="jobsPage" class="hidden">
+
+    <div class="card">
+      <h2>💼 Աշխատանքներ</h2>
+
+      <div class="item">
+        <div class="item-top">
+          <span>📦 Առաքիչ</span>
+          <span>15,000 ֏</span>
+        </div>
+        <div class="price">
+          Պահանջ՝ 0 կրթություն
+        </div>
+        <button onclick="getJob('Առաքիչ',15000,0)">
+          Ընդունվել
+        </button>
+      </div>
+
+      <div class="item">
+        <div class="item-top">
+          <span>🚕 Տաքսիստ</span>
+          <span>25,000 ֏</span>
+        </div>
+        <div class="price">
+          Պահանջ՝ 10 կրթություն + մեքենա
+        </div>
+        <button onclick="getJob('Տաքսիստ',25000,10)">
+          Ընդունվել
+        </button>
+      </div>
+
+      <div class="item">
+        <div class="item-top">
+          <span>💻 Junior Developer</span>
+          <span>45,000 ֏</span>
+        </div>
+        <div class="price">
+          Պահանջ՝ 40 կրթություն
+        </div>
+        <button onclick="getJob('Junior Developer',45000,40)">
+          Ընդունվել
+        </button>
+      </div>
+
+      <button onclick="openPage('homePage')">
+        ← Հետ
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- REAL ESTATE -->
+
+  <div id="realPage" class="hidden">
+
+    <div class="card">
+
+      <h2>🏠 Բնակարաններ</h2>
+
+      <div class="item">
+        <div class="item-top">
+          <span>🛏️ Հանրակացարան</span>
+          <span>20,000 ֏</span>
+        </div>
+
+        <div class="price">
+          Ամսական վարձ
+        </div>
+
+        <button onclick="rentHome('Հանրակացարան',20000)">
+          Վարձել
+        </button>
+      </div>
+
+
+      <div class="item">
+        <div class="item-top">
+          <span>🏢 1 սենյականոց</span>
+          <span>70,000 ֏</span>
+        </div>
+
+        <div class="price">
+          Ամսական վարձ
+        </div>
+
+        <button onclick="rentHome('1 սենյականոց բնակարան',70000)">
+          Վարձել
+        </button>
+      </div>
+
+
+      <button onclick="openPage('homePage')">
+        ← Հետ
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- BANK -->
+
+  <div id="bankPage" class="hidden">
+
+    <div class="card">
+
+      <h2>🏦 Բանկ</h2>
+
+      <div>
+        💰 Կանխիկ՝
+        <b id="bankCash">0 ֏</b>
+      </div>
+
+      <button onclick="deposit()">
+        💵 Դնել ավանդ
+      </button>
+
+      <button onclick="loan()">
+        💳 Վարկ վերցնել
+      </button>
+
+      <button onclick="openPage('homePage')">
+        ← Հետ
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- GARAGE -->
+
+  <div id="garagePage" class="hidden">
+
+    <div class="card">
+
+      <h2>🚗 Ավտոտնակ</h2>
+
+      <div id="carInfo">
+        Մեքենա չունես
+      </div>
+
+      <div class="item">
+
+        <div class="item-top">
+          <span>🚗 Opel Astra G</span>
+          <span>450,000 ֏</span>
+        </div>
+
+        <button onclick="buyCar('Opel Astra G',450000)">
+          Գնել
+        </button>
+
+      </div>
+
+
+      <div class="item">
+
+        <div class="item-top">
+          <span>🚘 BMW E46</span>
+          <span>1,500,000 ֏</span>
+        </div>
+
+        <button onclick="buyCar('BMW E46',1500000)">
+          Գնել
+        </button>
+
+      </div>
+
+      <button onclick="openPage('homePage')">
+        ← Հետ
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- BUSINESS -->
+
+  <div id="businessPage" class="hidden">
+
+    <div class="card">
+
+      <h2>🏢 Բիզնես</h2>
+
+      <div id="businessInfo">
+        Բիզնես չունես։
+      </div>
+
+      <button onclick="buyBusiness()">
+        🧽 Գնել ավտոլվացում — 2,000,000 ֏
+      </button>
+
+      <button onclick="openPage('homePage')">
+        ← Հետ
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="nav">
+
+  <button onclick="openPage('homePage')">
+    🏠<br>Կյանք
+  </button>
+
+  <button onclick="openPage('jobsPage')">
+    💼<br>Գործ
+  </button>
+
+  <button onclick="openPage('garagePage')">
+    🚗<br>Մեքենա
+  </button>
+
+  <button onclick="openPage('bankPage')">
+    🏦<br>Բանկ
+  </button>
+
+  <button onclick="openPage('businessPage')">
+    🏢<br>Բիզնես
+  </button>
+
+</div>
+
+
+<script>
+
+const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
+
+
+/* =========================
+   GAME STATE
+========================= */
+
+let game = {
+
+  money: 0,
+
+  health: 100,
+
+  energy: 100,
+
+  education: 0,
+
+  reputation: 0,
+
+  level: 1,
+
+  job: null,
+
+  salary: 0,
+
+  home: null,
+
+  rent: 0,
+
+  car: null,
+
+  business: null,
+
+  businessIncome: 0,
+
+  bank: 0,
+
+  debt: 0,
+
+  lastUpdate: Date.now()
+
+};
+
+
+/* =========================
+   FORMAT
+========================= */
+
+function moneyFormat(value){
+
+  return Math.floor(value)
+    .toLocaleString("hy-AM") + " ֏";
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+
+  localStorage.setItem(
+    "armeniaLifeGame",
+    JSON.stringify(game)
+  );
+
+}
+
+
+/* =========================
+   LOAD
+========================= */
+
+function load(){
+
+  const saved =
+    localStorage.getItem("armeniaLifeGame");
+
+  if(saved){
+
+    game = JSON.parse(saved);
+
+  }
+
+}
+
+
+/* =========================
+   OFFLINE INCOME
+========================= */
+
+function offlineIncome(){
+
+  const now = Date.now();
+
+  const seconds =
+    (now - game.lastUpdate) / 1000;
+
+  const hours =
+    seconds / 3600;
+
+  let income = 0;
+
+  if(game.salary > 0){
+
+    income +=
+      game.salary * hours;
+
+  }
+
+  if(game.businessIncome > 0){
+
+    income +=
+      game.businessIncome * hours;
+
+  }
+
+  income =
+    Math.min(income,500000);
+
+  if(income > 0){
+
+    game.money += income;
+
+    game.lastUpdate = now;
+
+    save();
+
+  }
+
+}
+
+
+/* =========================
+   UI
+========================= */
+
+function update(){
+
+  document.getElementById("money")
+    .innerText =
+    moneyFormat(game.money);
+
+  document.getElementById("capital")
+    .innerText =
+    moneyFormat(
+      game.money +
+      game.bank
+    );
+
+  document.getElementById("health")
+    .innerText =
+    Math.round(game.health);
+
+  document.getElementById("energy")
+    .innerText =
+    Math.round(game.energy);
+
+  document.getElementById("education")
+    .innerText =
+    game.education;
+
+  document.getElementById("reputation")
+    .innerText =
+    game.reputation;
+
+  document.getElementById("level")
+    .innerText =
+    "Level " +
+    game.level +
+    " • " +
+    levelName();
+
+
+  document.getElementById("healthBar")
+    .style.width =
+    game.health + "%";
+
+  document.getElementById("energyBar")
+    .style.width =
+    game.energy + "%";
+
+
+  document.getElementById("jobInfo")
+    .innerText =
+    game.job
+      ? game.job +
+        " • " +
+        moneyFormat(game.salary) +
+        " / օր"
+      : "Գործազուրկ";
+
+
+  document.getElementById("homeInfo")
+    .innerText =
+    game.home
+      ? game.home +
+        " • " +
+        moneyFormat(game.rent) +
+        " / ամիս"
+      : "Անօթևան";
+
+
+  document.getElementById("carInfo")
+    .innerText =
+    game.car
+      ? "🚗 " + game.car
+      : "Մեքենա չունես";
+
+
+  document.getElementById("businessInfo")
+    .innerText =
+    game.business
+      ? "🏢 " +
+        game.business +
+        " • " +
+        moneyFormat(game.businessIncome) +
+        " / ժամ"
+      : "Բիզնես չունես";
+
+
+  document.getElementById("bankCash")
+    .innerText =
+    moneyFormat(game.bank);
+
+}
+
+
+/* =========================
+   LEVEL
+========================= */
+
+function levelName(){
+
+  if(game.level >= 10)
+    return "Միլիոնատեր";
+
+  if(game.level >= 7)
+    return "Բիզնեսմեն";
+
+  if(game.level >= 5)
+    return "Միջին խավ";
+
+  if(game.level >= 3)
+    return "Աշխատող";
+
+  return "Սկսնակ";
+
+}
+
+
+function checkLevel(){
+
+  const required =
+    game.level * 100000;
+
+  if(game.money >= required){
+
+    game.level++;
+
+    tg.showAlert(
+      "🎉 Level Up!\n\n" +
+      "Դու հասար Level " +
+      game.level
+    );
+
+  }
+
+}
+
+
+/* =========================
+   WORK
+========================= */
+
+function work(){
+
+  if(!game.job){
+
+    tg.showAlert(
+      "Դու աշխատանք չունես։\n\n" +
+      "Գնա 💼 Գործ բաժին։"
+    );
+
+    return;
+
+  }
+
+  if(game.energy < 15){
+
+    tg.showAlert(
+      "⚡ Բավարար էներգիա չունես։"
+    );
+
+    return;
+
+  }
+
+  game.money += game.salary;
+
+  game.energy -= 15;
+
+  game.reputation += 1;
+
+  game.lastUpdate = Date.now();
+
+  randomEvent();
+
+  checkLevel();
+
+  save();
+
+  update();
+
+}
+
+
+/* =========================
+   EAT
+========================= */
+
+function eat(){
+
+  if(game.money < 3000){
+
+    tg.showAlert(
+      "💸 Բավարար գումար չունես։"
+    );
+
+    return;
+
+  }
+
+  game.money -= 3000;
+
+  game.health =
+    Math.min(100,game.health + 15);
+
+  game.energy =
+    Math.min(100,game.energy + 10);
+
+  save();
+
+  update();
+
+}
+
+
+/* =========================
+   STUDY
+========================= */
+
+function study(){
+
+  if(game.energy < 20){
+
+    tg.showAlert(
+      "⚡ Բավարար էներգիա չունես։"
+    );
+
+    return;
+
+  }
+
+  game.energy -= 20;
+
+  game.education += 5;
+
+  game.reputation += 1;
+
+  save();
+
+  update();
+
+  tg.showAlert(
+    "🧠 Դու սովորեցիր +5 կրթություն։"
+  );
+
+}
+
+
+/* =========================
+   JOB
+========================= */
+
+function getJob(
+  name,
+  salary,
+  requirement
+){
+
+  if(game.education < requirement){
+
+    tg.showAlert(
+      "❌ Կրթության մակարդակը բավարար չէ։"
+    );
+
+    return;
+
+  }
+
+  if(name === "Տաքսիստ" && !game.car){
+
+    tg.showAlert(
+      "🚗 Այս աշխատանքի համար մեքենա է պետք։"
+    );
+
+    return;
+
+  }
+
+  game.job = name;
+
+  game.salary = salary;
+
+  game.reputation += 3;
+
+  save();
+
+  update();
+
+  tg.showAlert(
+    "✅ Դու ընդունվեցիր աշխատանքի։"
+  );
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function rentHome(
+  name,
+  price
+){
+
+  if(game.money < price){
+
+    tg.showAlert(
+      "💸 Բավարար գումար չունես։"
+    );
+
+    return;
+
+  }
+
+  game.money -= price;
+
+  game.home = name;
+
+  game.rent = price;
+
+  save();
+
+  update();
+
+  tg.showAlert(
+    "🏠 Դու վարձեցիր " + name
+  );
+
+}
+
+
+/* =========================
+   CAR
+========================= */
+
+function buyCar(
+  name,
+  price
+){
+
+  if(game.money < price){
+
+    tg.showAlert(
+      "💸 Բավարար գումար չունես։"
+    );
+
+    return;
+
+  }
+
+  game.money -= price;
+
+  game.car = name;
+
+  game.reputation += 5;
+
+  save();
+
+  update();
+
+  tg.showAlert(
+    "🚗 Դու գնեցիր " + name
+  );
+
+}
+
+
+/* =========================
+   BANK
+========================= */
+
+function deposit(){
+
+  if(game.money <= 0){
+
+    tg.showAlert(
+      "Դնելու գումար չունես։"
+    );
+
+    return;
+
+  }
+
+  const amount =
+    prompt(
+      "Քանի՞ դրամ դնել ավանդ։"
+    );
+
+  const value =
+    Number(amount);
+
+  if(
+    !value ||
+    value <= 0 ||
+    value > game.money
+  ){
+
+    return;
+
+  }
+
+  game.money -= value;
+
+  game.bank += value;
+
+  save();
+
+  update();
+
+}
+
+
+/* =========================
+   LOAN
+========================= */
+
+function loan(){
+
+  const amount =
+    prompt(
+      "Քանի՞ դրամ վարկ վերցնել։"
+    );
+
+  const value =
+    Number(amount);
+
+  if(!value || value <= 0)
+    return;
+
+  game.money += value;
+
+  game.debt +=
+    value * 1.15;
+
+  save();
+
+  update();
+
+  tg.showAlert(
+    "💳 Վարկը ստացվեց։\n\n" +
+    "Պարտք՝ " +
+    moneyFormat(game.debt)
+  );
+
+}
+
+
+/* =========================
+   BUSINESS
+========================= */
+
+function buyBusiness(){
+
+  const price =
+    2000000;
+
+  if(game.business){
+
+    tg.showAlert(
+      "Դու արդեն բիզնես ունես։"
+    );
+
+    return;
+
+  }
+
+  if(game.money < price){
+
+    tg.showAlert(
+      "💸 Ավտոլվացման համար " +
+      moneyFormat(price) +
+      " է պետք։"
+    );
+
+    return;
+
+  }
+
+  game.money -= price;
+
+  game.business =
+    "Ավտոլվացում";
+
+  game.businessIncome =
+    15000;
+
+  game.reputation += 15;
+
+  save();
+
+  update();
+
+  tg.showAlert(
+    "🏢 Բիզնեսը բացվեց։"
+  );
+
+}
+
+
+/* =========================
+   RANDOM EVENTS
+========================= */
+
+function randomEvent(){
+
+  const chance =
+    Math.random();
+
+  if(chance > 0.75){
+
+    game.money += 10000;
+
+    document.getElementById("eventText")
+      .innerText =
+      "🎁 Հաճախորդը քեզ հավելավճար տվեց։ +10,000 ֏";
+
+  }
+
+  else if(chance < 0.10){
+
+    game.money =
+      Math.max(
+        0,
+        game.money - 5000
+      );
+
+    document.getElementById("eventText")
+      .innerText =
+      "⚠️ Անսպասելի ծախս։ -5,000 ֏";
+
+  }
+
+  else{
+
+    document.getElementById("eventText")
+      .innerText =
+      "📅 Օրդ անցավ նորմալ։ Շարունակի՛ր առաջ գնալ։";
+
+  }
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function openPage(page){
+
+  const pages = [
+    "homePage",
+    "jobsPage",
+    "realPage",
+    "bankPage",
+    "garagePage",
+    "businessPage"
+  ];
+
+  pages.forEach(
+    p =>
+      document
+        .getElementById(p)
+        .classList.add("hidden")
+  );
+
+  document
+    .getElementById(page)
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+load();
+
+offlineIncome();
+
+update();
+
+setInterval(
+  function(){
+
+    game.energy =
+      Math.min(
+        100,
+        game.energy + 1
+      );
+
+    game.lastUpdate =
+      Date.now();
+
+    save();
+
+    update();
+
+  },
+  60000
+);
+
+</script>
 
 </body>
 </html>
